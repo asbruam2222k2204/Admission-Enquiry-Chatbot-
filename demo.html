@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamil Nadu College Counseling Chatbot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Product+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Product Sans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('https://cdn.pixabay.com/photo/2021/10/11/04/08/university-6699377_1280.jpg') no-repeat center center/cover;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: #3498db;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .content {
+            padding: 20px;
+            color: black;
+            font-size: 30px;
+            position: fixed;
+            left: 300px;
+            top: 80px;
+        }
+
+        .admission {
+            padding: 20px;
+            position: fixed;
+            left: 400px;
+            bottom: 100px;
+            color: white;
+            font-size: 20px;
+        }
+
+        .contact {
+            padding: 20px;
+            position: fixed;
+            left: 30px;
+            bottom: 5px;
+            color: greenyellow;
+            font-size: 20px;
+        }
+
+        /* Announcement Tab */
+        .announcement-tab {
+            position: fixed;
+            left: 400px;
+            top: 230px;
+            width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .announcement-tab h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .announcement-tab ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .announcement-tab ul li {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .toggle-btn {
+            display: block;
+            width: 100%;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .toggle-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Chatbot Styling */
+        .chat-container {
+            width: 400px;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            height: 600px;
+        }
+
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 75%;
+        }
+
+        .user-message {
+            background: #3498db;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background: #2c3e50;
+            color: white;
+            align-self: flex-start;
+        }
+
+        .input-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #3498db;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Counseling 2025</h1>
+        <ul class="nav-links">
+            <li><a href="https://tndce.tn.gov.in/Colleges" target="_blank">Colleges</a></li>
+        </ul>
+    </div>
+
+    <!-- Announcement Tab -->
+    <div class="announcement-tab" id="announcementTab">
+        <h2>Announcements</h2>
+        <ul>
+            <li>🔔 Admission deadlines extended to March 15.</li>
+            <li>📢 New scholarship programs available!</li>
+            <li>🎓 Counseling starts from April 10.</li>
+        </ul>
+        <button class="toggle-btn" onclick="toggleAnnouncements()">Close</button>
+    </div>
+
+    <div class="content">
+        <p>Welcome to the Tamil Nadu College Counseling portal</p>
+    </div>
+
+    <div class="admission">
+        <p>Admissions based on higher secondary marks</p>
+    </div>
+
+    <div class="contact">
+        <p>Contact our official Email for inquiries: <br> tnadmissions@gmail.com</p>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div class="bot-message message">Hello! How can I assist you?</div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Ask about Tamil Nadu college counseling..." onkeypress="handleKeyPress(event)" />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            let userInput = document.getElementById("user-input").value.trim();
+            let chatBox = document.getElementById("chat-box");
+
+            if (userInput === "") return;
+
+            let userMessage = document.createElement("div");
+            userMessage.classList.add("user-message", "message");
+            userMessage.textContent = userInput;
+            chatBox.appendChild(userMessage);
+            document.getElementById("user-input").value = "";
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Send user input to backend
+            try {
+                let response = await fetch('http://localhost:3000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userInput })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Backend not responding");
+                }
+
+                let data = await response.json();
+                let botMessage = document.createElement("div");
+                botMessage.classList.add("bot-message", "message");
+                botMessage.textContent = data.reply; // Assuming the backend responds with a 'reply' field
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                let errorMessage = document.createElement("div");
+                errorMessage.classList.add("bot-message", "message");
+                errorMessage.textContent = "Sorry, I couldn't process your request. Please try again later.";
+                chatBox.appendChild(errorMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") sendMessage();
+        }
+
+        function toggleAnnouncements() {
+            document.getElementById("announcementTab").style.display = "none";
+        }
+    </script>
+</body>
+</html>
